@@ -78,11 +78,38 @@ def find_by_name(data: list, name):
             return ("нет такого значения")
         
 def find_by_number(data: list, number):
-    for j in data:
-        if j.get("фамилия") == number:
-            return j.get ("Телефон")
+    for x in data:
+        if x.get("Телефоны") == number:
+            return x.get ("Фамилия")
         else :
             return ("нет такого значения")
 
+def get_new_user():
+    a = input("Введите фамилию: ")
+    b = input("Введите имя: ")
+    c = input("Введите номер: ")
+    d = input("Введите описание: ")
+    return f'{a}, {b}, {c}, {d}'
+
+def add_user(data: list, user_data: str): 
+    fields = ["Фамилия", "Имя", "Телефон", "Описание"]
+    record = dict(zip(fields, user_data.split(',')))
+    data.append(record)
+
+def write_txt(filename, phone_book):
+    with open(filename, 'w', encoding='utf-8') as sfile:
+        for i in range(len(phone_book)):
+           s = ''
+           for v in phone_book[i].values():
+               s += v + ','
+           sfile.write(f'{s[:-1]}\n') 
+        print(phone_book, file=sfile)
+
+# def add_user(data: list, user_data):
+#     return data.append(user_data)
+
+def get_file_name():
+    file_name = input("введите название: ")
+    return file_name
 
 Work_with_phonebook()
